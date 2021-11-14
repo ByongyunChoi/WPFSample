@@ -5,16 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFSample"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="322" Width="659">
     <Grid>
         <Button x:Name="btnStringSample" Content="String" HorizontalAlignment="Left" Margin="43,27,0,0" VerticalAlignment="Top" Width="89" Height="35" Click="btnStringSample_Click"/>
         <Button x:Name="btnDateTime" Content="DateTime" HorizontalAlignment="Left" Margin="148,27,0,0" VerticalAlignment="Top" Width="89" Height="35" Click="btnDateTime_Click" />
         <Button x:Name="btnProperty" Content="Property" HorizontalAlignment="Left" Margin="253,27,0,0" VerticalAlignment="Top" Width="89" Height="35" Click="btnProperty_Click" />
-        <Button x:Name="btnProperty_Copy" Content="Thread" HorizontalAlignment="Left" Margin="43,114,0,0" VerticalAlignment="Top" Width="89" Height="35" />
-        <Button x:Name="btnTask" Content="Task" HorizontalAlignment="Left" Margin="148,114,0,0" VerticalAlignment="Top" Width="89" Height="35"/>
-        <Button x:Name="btnWindowMessage" Content="WindowMessage" HorizontalAlignment="Left" Margin="43,241,0,0" VerticalAlignment="Top" Width="89" Height="35"/>
-        <Button x:Name="btnAsync" Content="Async" HorizontalAlignment="Left" Margin="253,114,0,0" VerticalAlignment="Top" Width="89" Height="35" RenderTransformOrigin="1.974,0.959"/>
-        <Button x:Name="btnFileDirectory" Content="File/Directory" HorizontalAlignment="Left" Margin="359,114,0,0" VerticalAlignment="Top" Width="89" Height="35" RenderTransformOrigin="1.974,0.959"/>
+        <Button x:Name="btnThread" Content="Thread" HorizontalAlignment="Left" Margin="43,114,0,0" VerticalAlignment="Top" Width="89" Height="35" Click="btnThread_Click" />
+        <Button x:Name="btnTask" Content="Task" HorizontalAlignment="Left" Margin="43,211,0,0" VerticalAlignment="Top" Width="89" Height="35" Click="btnTask_Click"/>
+        <Button x:Name="btnWindowMessage" Content="WindowMessage" HorizontalAlignment="Left" Margin="371,27,0,0" VerticalAlignment="Top" Width="89" Height="35" Click="btnWindowMessage_Click"/>
+        <Button x:Name="btnAsync" Content="Async" HorizontalAlignment="Left" Margin="43,163,0,0" VerticalAlignment="Top" Width="89" Height="35" RenderTransformOrigin="1.974,0.959" Click="btnAsync_Click"/>
+        <Button x:Name="btnFileDirectory" Content="File/Directory" HorizontalAlignment="Left" Margin="484,27,0,0" VerticalAlignment="Top" Width="89" Height="35" RenderTransformOrigin="1.974,0.959" Click="btnFileDirectory_Click"/>
+        <Label x:Name="lblEnqueueValue" Content="0" HorizontalAlignment="Left" Margin="137,118,0,0" VerticalAlignment="Top" Height="25" Width="47"/>
+        <Label x:Name="lblDequeueValue" Content="0" HorizontalAlignment="Left" Margin="189,118,0,0" VerticalAlignment="Top" Height="25" Width="59"/>
+        <Label x:Name="lblAsyncValue" Content="0" HorizontalAlignment="Left" Margin="137,167,0,0" VerticalAlignment="Top" Height="25" Width="59"/>
+        <Label x:Name="lblTaskValue" Content="0" HorizontalAlignment="Left" Margin="137,215,0,0" VerticalAlignment="Top" Height="25" Width="262"/>
 
     </Grid>
 </Window>

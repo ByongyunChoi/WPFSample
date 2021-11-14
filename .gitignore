@@ -1,0 +1,6 @@
+/.vs
+/packages
+/ComponentLib/*.user
+/MFCApp/*.user
+/WPFSample/bin
+/WPFSample/obj
