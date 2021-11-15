@@ -4,3 +4,7 @@
 /MFCApp/*.user
 /WPFSample/bin
 /WPFSample/obj
+/MFCApp/Debug
+/MFCApp/x64
+/x64
+/Debug

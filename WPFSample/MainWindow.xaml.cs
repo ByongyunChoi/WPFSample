@@ -35,12 +35,29 @@ namespace WPFSample
 
             // constValue = 444; //const error
             readonlyValue = 777;
+
+            int normalValue = 10;
+            int refVale = 11;
+            int outValue;
+
+            Console.WriteLine($"Before : {normalValue} , {refVale}");
+
+            MethodTest(normalValue, ref refVale, out outValue);
+
+            Console.WriteLine($"After : {normalValue} , {refVale} , {outValue}");
         }
 
         private void Method1()
         {
             //constValue = 444;     //error
             //readonlyValue = 777;  //error
+        }
+
+        private void MethodTest(int normalValue, ref int refVale, out int outValue)
+        {
+            normalValue = 0;
+            refVale = 1;
+            outValue = 2;
         }
 
         private void btnStringSample_Click(object sender, RoutedEventArgs e)
@@ -65,6 +82,7 @@ namespace WPFSample
 
         private void btnWindowMessage_Click(object sender, RoutedEventArgs e)
         {
+            WindowMessageTest.Execute(this);
         }
 
         private void btnAsync_Click(object sender, RoutedEventArgs e)

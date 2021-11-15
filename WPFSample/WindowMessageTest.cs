@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
@@ -13,8 +16,6 @@ namespace WPFSample
     {
         private const int WM_COPYDATA = 0x4A;
         private const int WM_USER = 0x0400;
-        private const int WM_SCU_ECHO = WM_USER + 100;
-        private const int WM_SCU_CSTORE = WM_USER + 101;
         public static IntPtr HWND_BROADCAST = (IntPtr)0xFFFF;
 
         [StructLayout(LayoutKind.Sequential)]
@@ -65,9 +66,78 @@ namespace WPFSample
         [DllImport("User32.dll", EntryPoint = "PostMessage")]
         public static extern int PostMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
 
-        public static readonly int CXR_MSG_SHOW_WINDOW = RegisterWindowMessage("CXR_MSG_SHOW_WINDOW");
+        public static readonly int TEST_MESSAGE = RegisterWindowMessage("TEST_MESSAGE");
+        public static readonly int TEST_MESSAGE2 = RegisterWindowMessage("TEST_MESSAGE2");
 
         public static void Execute(Window window)
+        {
+            RegisterWndProc(window);
+
+            SendMessageToApp();
+        }
+
+        private static async void SendMessageToApp()
+        {
+            IntPtr hwnd = GetWindowHandle("MFCApp");
+
+            if (hwnd == IntPtr.Zero)
+            {
+                RunMFCApp();
+
+                await Task.Delay(2000);
+
+                hwnd = GetWindowHandle("MFCApp");
+            }
+
+            SendMessage(hwnd, TEST_MESSAGE, 1, 0);
+        }
+
+        private static void RunMFCApp()
+        {
+            string mfcAppPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "MFCApp.exe");
+
+            FileInfo fi = new FileInfo(mfcAppPath);
+
+            Process process = new Process();
+            process.StartInfo.Arguments = string.Empty;
+            process.StartInfo.FileName = mfcAppPath;
+
+            //if (bRunAsAdmin)
+            //{
+            //    process.StartInfo.Verb = "runas";
+            //}
+
+            //if (bHidden)
+            //{
+            //    process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            //}
+
+            process.Start();
+
+            //if (bWaitForIdle)
+            //{
+            //    process.WaitForInputIdle();
+            //}
+
+            //IntPtr hWnd = process.MainWindowHandle;
+        }
+
+        private static IntPtr GetWindowHandle(string processName)
+        {
+            IntPtr hWnd = IntPtr.Zero;
+            Process[] processList = Process.GetProcessesByName(processName);
+
+            foreach (var process in processList)
+            {
+                hWnd = process.MainWindowHandle;
+
+                if (hWnd.ToInt32() > 0) return hWnd;
+            }
+
+            return hWnd;
+        }
+
+        private static void RegisterWndProc(Window window)
         {
             HwndSource source = HwndSource.FromHwnd(new WindowInteropHelper(window).Handle);
             source.AddHook(new HwndSourceHook(WndProc));
@@ -75,8 +145,9 @@ namespace WPFSample
 
         private static IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
-            if (msg.Equals(CXR_MSG_SHOW_WINDOW))
+            if (msg.Equals(TEST_MESSAGE2))
             {
+                MessageBox.Show("WPF Message");
             }
 
             return IntPtr.Zero;

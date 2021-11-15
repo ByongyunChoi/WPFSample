@@ -65,6 +65,7 @@ BEGIN_MESSAGE_MAP(CMFCAppDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
+	ON_BN_CLICKED(IDC_BTN_SEND_MESSAGE, &CMFCAppDlg::OnBnClickedBtnSendMessage)
 END_MESSAGE_MAP()
 
 
@@ -153,3 +154,26 @@ HCURSOR CMFCAppDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
+static UINT TEST_MESSAGE = RegisterWindowMessage(_T("TEST_MESSAGE"));
+static UINT TEST_MESSAGE2 = RegisterWindowMessage(_T("TEST_MESSAGE2"));
+
+LRESULT CMFCAppDlg::WindowProc(UINT message, WPARAM wParam, LPARAM lParam)
+{
+	if (message == TEST_MESSAGE)
+	{
+		AfxMessageBox(L"MFC Message");
+	}
+
+	return CDialogEx::WindowProc(message, wParam, lParam);
+}
+
+
+void CMFCAppDlg::OnBnClickedBtnSendMessage()
+{
+	//HWND hWnd = FindWindow(NULL, L"WPFSample");
+	//CWnd* wpfWindw = FindWindow(NULL, L"WPFSample");
+
+	HWND hWnd = ::FindWindow(NULL, L"MainWindow");
+	
+	::SendMessage(hWnd, TEST_MESSAGE2, 0, 0);
+}
