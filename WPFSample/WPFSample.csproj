@@ -58,6 +58,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="MultiLang.cs" />
     <Compile Include="PropertyTest.cs" />
     <Compile Include="TaskTest.cs" />
     <Compile Include="Test.cs" />

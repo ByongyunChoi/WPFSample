@@ -29,6 +29,8 @@ namespace WPFSample
         // readonly는 변수 선언시와 생성자에서만 가능
         private readonly int readonlyValue = 666;
 
+        private MultiLang lang;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -45,6 +47,10 @@ namespace WPFSample
             MethodTest(normalValue, ref refVale, out outValue);
 
             Console.WriteLine($"After : {normalValue} , {refVale} , {outValue}");
+
+            lang = MultiLang.Instance;
+            lang.Initialize(MultiLang.Language.Eng);
+            string displayValue = lang.GetText("Hello");
         }
 
         private void Method1()
