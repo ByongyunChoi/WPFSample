@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static WPFSample.MultiLang;
 
 namespace WPFSample
 {
@@ -50,7 +51,9 @@ namespace WPFSample
 
             lang = MultiLang.Instance;
             lang.Initialize(MultiLang.Language.Eng);
-            string displayValue = lang.GetText("Hello");
+
+            string displayValue1 = lang.GetText("Do you want to exit?");
+            string displayValue2 = lang.GetText(KeyValue.ExitQuestionMsg);
         }
 
         private void Method1()

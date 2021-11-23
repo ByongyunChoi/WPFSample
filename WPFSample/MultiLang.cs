@@ -36,8 +36,9 @@ namespace WPFSample
             // read language data form language file
             languageValues = new Dictionary<string, string>();
 
-            languageValues.Add("EngValue", "DisplayValue");
+            languageValues.Add("KeyValue", "DisplayValue");
             languageValues.Add("Hello", "안녕하세요");
+            languageValues.Add("ExitQuestionMsg", "Do you want to exit?");
         }
 
         public string GetText(string defaultValue)
@@ -52,6 +53,12 @@ namespace WPFSample
             {
                 return defaultValue;
             }
+        }
+
+        public struct KeyValue
+        {
+            public const string Hello = "Hello";
+            public const string ExitQuestionMsg = "ExitQuestionMsg";
         }
     }
 }
